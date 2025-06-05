@@ -67,6 +67,7 @@
       height: 280px;
       background-color: #ddd;
       border-radius: 10px;
+      margin-left: 140px;
     }
 
     .film-detail h2 {
@@ -83,6 +84,7 @@
     /* Pemeran */
     .pemeran-section {
       margin-top: 30px;
+      margin-left: 140px;
     }
 
     .pemeran-section h3 {
@@ -117,6 +119,7 @@
     /* Deskripsi Film */
     .description-section {
       margin-top: 30px;
+      margin-left: 140px;
     }
 
     .description-section h4 {
@@ -130,6 +133,7 @@
       border-radius: 10px;
       font-size: 14px;
       line-height: 1.6;
+      width: 420px;
     }
   </style>
 </head>
