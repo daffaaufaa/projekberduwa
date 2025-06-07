@@ -5,36 +5,48 @@
   <title>Forget Password - AZFATICKET.XXI</title>
   <style>
     /* ===== HEADER NAVIGATION ===== */
-    .header {
-      background: #f08080;
+      body {
+      margin: 0;
+      background-color: #ffffff;
+    }
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+        header {
+      background-color: #f19c9c;
+      padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 30px;
-      border-bottom: 4px solid #007bff; /* Garis biru bawah */
     }
+
     .logo {
       display: flex;
       align-items: center;
+      font-weight: bold;
+      font-size: 24px;
     }
     .logo img {
-      height: 40px;
       margin-right: 10px;
+      height: 9%;
+      width: 9%;
     }
-    .logo h1 {
-      font-family: 'Courier New', Courier, monospace;
-      font-weight: bold;
-      color: black;
-    }
-    .nav a {
+
+    nav a {
       margin: 0 15px;
-      font-weight: bold;
-      color: black;
       text-decoration: none;
+      color: #000;
+      font-weight: bold;
     }
-    .user-icon {
-      font-size: 20px;
-      margin-left: 10px;
+
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      background-image: url('userputih.jpg');
+      background-size: contain;
+      border-radius: 50%;
     }
 
     /* ===== CONTAINER FORM FORGET PASSWORD ===== */
@@ -112,18 +124,17 @@
 <body>
 
   <!-- ===== HEADER ===== -->
-  <div class="header">
+  <header>
     <div class="logo">
-      <img src="logo.png" alt="logo"> <!-- Ganti dengan logo -->
-      <h1>AZFATICKET.XXI</h1>
-    </div>
-    <div class="nav">
+      <img src="logo_web.png" alt="" />
+      AZFATICKET.XXI</div>
+    <nav>
       <a href="#">MOVIE</a>
       <a href="#">CINEMA</a>
       <a href="#">CONTACT</a>
-      <span class="user-icon">👤</span>
-    </div>
-  </div>
+    </nav>
+    <div class="profile-icon"></div>
+  </header>
 
   <!-- ===== FORGET PASSWORD FORM ===== -->
   <div class="forgot-container">

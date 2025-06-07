@@ -6,20 +6,16 @@
   <title>Siksa Neraka - Detail Film</title>
   <style>
     /* Reset dasar */
-    * {
+       body {
+      margin: 0;
+      background-color: #ffffff;
+    }
+        * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #fff;
-      color: #000;
-    }
-    
-    /* Header navbar */
-    header {
+        header {
       background-color: #f19c9c;
       padding: 15px 30px;
       display: flex;
@@ -28,8 +24,15 @@
     }
 
     .logo {
+      display: flex;
+      align-items: center;
       font-weight: bold;
       font-size: 24px;
+    }
+    .logo img {
+      margin-right: 10px;
+      height: 9%;
+      width: 9%;
     }
 
     nav a {
@@ -42,7 +45,8 @@
     .profile-icon {
       width: 40px;
       height: 40px;
-      background-color: #ccc;
+      background-image: url('userputih.jpg');
+      background-size: contain;
       border-radius: 50%;
     }
     
@@ -141,10 +145,12 @@
 
   <!-- Header -->
   <header>
-    <div class="logo">AZFATICKET.XXI</div>
+    <div class="logo">
+      <img src="logo_web.png" alt="" />
+      AZFATICKET.XXI</div>
     <nav>
-      <a href="#">HOME</a>
       <a href="#">MOVIE</a>
+      <a href="#">CINEMA</a>
       <a href="#">CONTACT</a>
     </nav>
     <div class="profile-icon"></div>

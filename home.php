@@ -2,16 +2,14 @@
 include "koneksi.php";
 session_start();
 
-if(!isset($_SESSION['username'])){
-    header("location:login.php?logindulu");
-    exit;
-}
-$sql = "SELECT * FROM iklan";
-$query = mysqli_query($koneksi,$sql);
+// if(!isset($_SESSION['username'])){
+//   $username = "AZFATICKET.XXI!";
+//   exit;
+// }else{
+//   $username = $_SESSION['username']."!";
+//   exit;
+// }
 
-$sekarang = date("Y-m-d");
-$sql2 = "SELECT * FROM movies WHERE max_tayang >= '$sekarang'";
-$query2 =  mysqli_query($koneksi,$sql2);
 
 ?>
 <!DOCTYPE html>
@@ -21,21 +19,24 @@ $query2 =  mysqli_query($koneksi,$sql2);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AZFATICKET.XXI</title>
   <style>
+    /* daftar font */
+    @font-face {
+            src: url('font/KeaniaOne.ttf') format('truetype');
+            font-family: 'KeaniaOne';
+            font-weight: normal;
+            font-style: normal;
+        }
     /* Reset dasar */
-    * {
+       body {
+      margin: 0;
+      background-color: #ffffff;
+    }
+        * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #fff;
-      color: #000;
-    }
-
-    /* Header navbar */
-    header {
+        header {
       background-color: #f19c9c;
       padding: 15px 30px;
       display: flex;
@@ -44,8 +45,15 @@ $query2 =  mysqli_query($koneksi,$sql2);
     }
 
     .logo {
+      display: flex;
+      align-items: center;
       font-weight: bold;
       font-size: 24px;
+    }
+    .logo img {
+      margin-right: 10px;
+      height: 9%;
+      width: 9%;
     }
 
     nav a {
@@ -58,16 +66,17 @@ $query2 =  mysqli_query($koneksi,$sql2);
     .profile-icon {
       width: 40px;
       height: 40px;
-      background-color: #ccc;
+      background-image: url('userputih.jpg');
+      background-size: contain;
       border-radius: 50%;
     }
 
     /* Welcome section */
     .welcome {
+      font-family: "KeaniaOne";
       text-align: center;
-      font-size: 32px;
+      font-size: 34px;
       margin: 30px 0;
-      font-weight: bold;
     }
 
     .voucher-container {
@@ -173,7 +182,9 @@ $query2 =  mysqli_query($koneksi,$sql2);
 
   <!-- Header -->
   <header>
-    <div class="logo">AZFATICKET.XXI</div>
+    <div class="logo">
+      <img src="logo_web.png" alt="" />
+      AZFATICKET.XXI</div>
     <nav>
       <a href="#">MOVIE</a>
       <a href="#">CINEMA</a>
@@ -183,7 +194,7 @@ $query2 =  mysqli_query($koneksi,$sql2);
   </header>
 
   <!-- Welcome -->
-  <div class="welcome">welcome</div>
+  <div class="welcome">welcome to </div>
 
   <!-- Voucher Section -->
   <div class="voucher-container">

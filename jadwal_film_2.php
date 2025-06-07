@@ -2,10 +2,10 @@
 include "koneksi.php";
 session_start();
 
-if(!isset($_SESSION['username'])){
-    header("location:login.php?logindulu");
-    exit;
-}
+// if(!isset($_SESSION['username'])){
+//     header("location:login.php?logindulu");
+//     exit;
+// }
 $id_movie = $_GET['id_movie'];
 
 $sql = "SELECT * FROM movies WHERE id_movies = '$id_movie'";
