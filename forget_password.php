@@ -146,10 +146,10 @@
       <div class="forgot-form">
         <h2>AZFATICKET.XXI</h2>
         <p>CITY MALL<br><strong>forget password ?</strong></p>
-        <form method="POST" action="forget-password.php">
+        <form method="POST" action="proses_forget.php">
           <input type="text" name="username" placeholder="username" required>
           <input type="password" name="new_password" placeholder="password baru" required>
-          <input type="password" name="confirm_password" placeholder="password baru" required>
+          <input type="password" name="confirm_password" placeholder="confirm password" required>
           <button type="submit">submit</button>
         </form>
       </div>

@@ -2,14 +2,19 @@
 include "koneksi.php";
 session_start();
 
-// if(!isset($_SESSION['username'])){
-//   $username = "AZFATICKET.XXI!";
-//   exit;
-// }else{
-//   $username = $_SESSION['username']."!";
-//   exit;
-// }
+if(isset($_SESSION['username'])){
+  $username = $_SESSION['username']."!";
+  
+}else{
+  $username = "to AZFATICKET.XXI!";
+  
+}
+$sql = "SELECT * FROM iklan";
+$query = mysqli_query($koneksi, $sql);
 
+$sekarang = date("Y-m-d");
+$sql2 = "SELECT * FROM movies WHERE max_tayang >= '$sekarang'";
+$query2 =  mysqli_query($koneksi,$sql2);
 
 ?>
 <!DOCTYPE html>
@@ -86,10 +91,9 @@ session_start();
       margin-bottom: 40px;
     }
 
-    .voucher {
-      width: 180px;
-      height: 100px;
-      background-color: #f8dcdc;
+    .voucher-container img {
+      width: 200px;
+      height: 120px;
       border-radius: 10px;
     }
 
@@ -112,10 +116,9 @@ session_start();
       gap: 20px;
     }
 
-    .movie {
-      width: 140px;
+    .movie-list img {
+      width: 170px;
       height: 210px;
-      background-color: #ddd;
       border-radius: 8px;
     }
 
@@ -187,31 +190,29 @@ session_start();
       AZFATICKET.XXI</div>
     <nav>
       <a href="#">MOVIE</a>
-      <a href="#">CINEMA</a>
+      <a href="#">CINEMA</a>  
       <a href="#">CONTACT</a>
     </nav>
     <div class="profile-icon"></div>
   </header>
 
   <!-- Welcome -->
-  <div class="welcome">welcome to </div>
+  <div class="welcome">welcome <?= $username; ?> </div>
 
   <!-- Voucher Section -->
   <div class="voucher-container">
-    <div class="voucher"></div>
-    <div class="voucher"></div>
-    <div class="voucher"></div>
-    <div class="voucher"></div>
+    <?php while($gambar= mysqli_fetch_assoc($query)){ ?>
+        <img src="iklan/<?= $gambar['gambar']?>" alt="">
+    <?php } ?>
   </div>
 
   <!-- Movie Section -->
   <div class="movie-section">
     <h2>MOVIE SELECTION</h2>
     <div class="movie-list">
-      <div class="movie"></div>
-      <div class="movie"></div>
-      <div class="movie"></div>
-      <div class="movie"></div>
+      <?php while($gambar2=mysqli_fetch_assoc($query2)){ ?>
+            <a href="jadwal_film.php?id_movies=<?= $gambar2['id_movies'] ?>"><img src="movie\<?= $gambar2['poster_image']?>" alt=""></a>
+      <?php } ?>
       <div class="movie"></div>
     </div>
   </div>

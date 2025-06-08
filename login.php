@@ -158,7 +158,7 @@
              <div class="login-form">
                 <h3>Login</h3>
                 <form action="proses_login.php" method="post">
-                    <input type="text" name="password" placeholder="username" id="">
+                    <input type="text" name="username" placeholder="username" id="">
                     <input type="password" name="password" placeholder="password" id="">
                     <button type="submit">Login</button>
                     <a class="forgot" href="forget_password">Forgot password</a>

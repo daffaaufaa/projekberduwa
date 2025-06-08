@@ -1,3 +1,23 @@
+<?php
+include "koneksi.php";
+
+if(!isset($_GET['id_movies'])){
+   header("location:home.php");
+}
+$id_movies = $_GET['id_movies'];
+$sql = "SELECT * FROM movies WHERE id_movies = '$id_movies'";
+$query = mysqli_query($koneksi,$sql);
+$movies = mysqli_fetch_assoc($query);
+
+$sql2 = "SELECT * FROM jadwal_waktu WHERE id_movies = '$id_movies'";
+$query2 = mysqli_query($koneksi,$sql2);
+
+$sql3 = "SELECT * FROM jadwal_waktu WHERE id_movies = '$id_movies'";
+$query3 = mysqli_query($koneksi,$sql3);
+
+$id = 1;
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -5,16 +25,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Siksa Neraka - Jadwal Tayang</title>
   <style>
-       body {
+    @font-face {
+      src: url('font/BalsamiqSans.ttf') format('truetype');
+      font-family: 'BalsamiqSans';
+      font-weight: normal;
+      font-style: normal;
+    }
+    input[type="radio"] {
+      display: none;
+    }
+    body {
       margin: 0;
       background-color: #ffffff;
     }
-        * {
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-        header {
+    header {
       background-color: #f19c9c;
       padding: 15px 30px;
       display: flex;
@@ -94,6 +123,23 @@
 .info h3{
     margin-top: 15px;
 }
+#jadwal label,#sinopsi label {
+    text-align: center;
+    background:rgba(255, 255, 255, 0);
+    border-bottom: none;
+    color:rgba(0, 0, 0, 0.4);
+    font-family: "BalsamiqSans";
+    font-size: 20px;
+    padding-left: 3.5vw;
+    cursor: pointer; 
+}
+#jadwal input[type=radio]:checked + label,#sinopsi input[type=radio]:checked + label {
+    
+    width: 10px;
+    border-bottom: 2px solid #FF0808;
+    color: #FF0808;
+}
+
 
 
 .tabs {
@@ -103,15 +149,6 @@
   font-size: 22px;
 }
 
-.tabs span {
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.tabs .active {
-  color: red;
-  border-bottom: 2px solid red;
-}
 
 .jarak{
     margin-top: 40px;
@@ -130,14 +167,21 @@
   margin: 10px 0;
 }
 
-.days button, .times button {
+.days label, .times label {
   background-color: white;
   border: 2px solid #ccc;
   border-radius: 10px;
   padding: 5px 10px;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
+
+.days input[type="radio"]:checked + label, .times input[type="radio"]:checked + label {
+  background-color:rgba(179, 44, 46, 0.82);
+  color: white;
+}
+
 
 .pick-button {
   display: inline-block;
@@ -149,6 +193,7 @@
   font-weight: bold;
   border-radius: 5px;
 }
+
 
   </style>
 
@@ -172,43 +217,93 @@
 
     <section class="movie-card">
         <div class="movie-jarak">
-            <img class="poster" src="movie/1.jpg" alt="">
+            <img class="poster" src="movie\<?= $movies['poster_image']?>" alt="">
             <div class="info">
-            <h3>SIKSA NERAKA</h3>
-            <p><strong>Horor</strong><br>98 minutes</p>
+            <h3><?= strtoupper($movies['title']) ?></h3>
+            <p><strong><?= ucfirst($movies['genre']) ?></strong><br>98 minutes</p>
 
             <div class="tabs">
-            <span class="active">JADWAL</span>
-            <span class="inactive">SINOPSIS</span>
+              <script>
+                  window.onload = function() {
+                      document.getElementById('ja_dwal').click();
+                  };
+              </script>
+
+              <div id="jadwal" onclick= "style_deskripsi()">
+                  <input type="radio" id="ja_dwal"  name="sinopsi" value="jadwal">
+                  <label for="ja_dwal">JADWAL</label>
+              </div>
+              <div id="sinopsi" onclick= "style_isi_jadwal()">
+                  <input type="radio" id="si_nopsi"  name="sinopsi" value="sinopsi">
+                  <label for="si_nopsi">SINOPSI</label>
+              </div>
+
+              
+
+              <script>
+                function style_isi_jadwal() {
+                    const btn = document.getElementById('isi_jadwal');
+                    btn.style.display = 'none';
+                
+                    document.getElementById('description').style.display='block';
+                }
+            
+                function style_deskripsi () {
+                    const btn2 = document.getElementById('description');
+                    btn2.style.display= 'none';
+                    document.getElementById('isi_jadwal').style.display='block';
+                }
+
+              </script>
             </div>
             </div>
         </div>
       
+      <div id="isi_jadwal">
+        <form action="kursi.php" method="post">
         <div class="jarak">
         <div class="schedules">
           <strong>SCHEDULES</strong>
           <div class="days">
-            <button>Mon <br> 5</button>
-            <button>Mon <br> 5</button>
-            <button>Mon <br> 5</button>
-            <button>Mon <br> 5</button>
-            <button>Mon <br> 5</button>
-            <button>Mon <br> 5</button>
+            <?php while($tanggal = mysqli_fetch_assoc($query2)){
+                    $date = new DateTime($tanggal['tanggal']);
+
+
+                    $tanggal_hari = $date->format('d'); // hari 2 angka, pake nol
+                    $nama_hari = $date->format('D'); 
+                    
+                    $id += 1;
+                ?>
+              <input type="radio" id="<?= $id ?>"  name="tanggal" value="<?= $tanggal['tanggal'] ?>">
+              <label for="<?= $id ?>"><?= $nama_hari ?><br><?= $tanggal_hari ?></label>
+
+                
+            <?php } ?>
           </div>
 
           <strong>TIME MOVIE</strong>
           <div class="times">
-            <button>10:50</button>
-            <button>13:00</button>
-            <button>10:50</button>
-            <button>10:50</button>
-            <button>10:50</button>
-            <button>10:50</button>
+            <?php while($waktu = mysqli_fetch_assoc($query3)){?>
+                    <input type="radio" id="<?= $waktu['id_jadwal_waktu'] ?>"  name="waktu" value="<?= $waktu['waktu'] ?>">
+                    <label for="<?= $waktu['id_jadwal_waktu'] ?>"><?= $waktu['waktu'] ?></label>
+            <?php } ?>
           </div>
         </div>
         <hr>
         <a href="#" class="pick-button">PICK YOUR SEAT</a>
       </div>
+      </form>
+      </div>
+      
+      <div class="jarak">
+        <div id="description">
+            <?= $movies['description'] ?>
+        </div>
+      </div>
+      
+            
+
+
     </section>
   </main>
 </body>

@@ -1,3 +1,17 @@
+<?php
+include "koneksi.php";
+if(!isset($_GET['id_movies'])){
+  header("location:home.php");
+}
+$id_movies = $_GET['id_movies'];
+$sql = "SELECT * FROM movies WHERE id_movies='$id_movies'";
+$query = mysqli_query($koneksi, $sql);
+$movies = mysqli_fetch_assoc($query);
+
+$sql2 = "SELECT * FROM artis_movies WHERE id_movies='$id_movies'";
+$query2 = mysqli_query($koneksi, $sql2);
+
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -66,10 +80,9 @@
     }
 
     /* Poster film */
-    .poster-placeholder {
+    .film-info img{
       width: 200px;
       height: 280px;
-      background-color: #ddd;
       border-radius: 10px;
       margin-left: 140px;
     }
@@ -106,19 +119,16 @@
     .pemeran-card {
       width: 80px;
       text-align: center;
+      font-size: 12px;
     }
 
-    .pemeran-photo {
+    .pemeran-card img {
       width: 80px;
       height: 80px;
-      background-color: #ccc;
       border-radius: 10px;
       margin-bottom: 5px;
     }
 
-    .pemeran-name {
-      font-size: 12px;
-    }
 
     /* Deskripsi Film */
     .description-section {
@@ -161,10 +171,10 @@
 
     <!-- Informasi Film -->
     <div class="film-info">
-      <div class="poster-placeholder"></div>
+      <img src="movie\<?= $movies['poster_image']?>" alt="">
       <div class="film-detail">
-        <h2>SIKSA NERAKA</h2>
-        <p><strong>Horor</strong></p>
+        <h2><?= $movies['title'] ?></h2>
+        <p><strong><?= ucfirst($movies['genre']) ?></strong></p>
         <p><strong>98 minutes</strong></p>
       </div>
     </div>
@@ -173,26 +183,12 @@
     <div class="pemeran-section">
       <h3>pemeran</h3>
       <div class="pemeran-list">
+        <?php while($artis= mysqli_fetch_assoc($query2)){ ?>
         <div class="pemeran-card">
-          <div class="pemeran-photo"></div>
-          <div class="pemeran-name">kiesha alvaro</div>
+          <img src="artis\<?= $artis['artis_image']?>.jpg" alt="">
+          <?= $artis['artis_name'] ?>
         </div>
-        <div class="pemeran-card">
-          <div class="pemeran-photo"></div>
-          <div class="pemeran-name">ratu sofya</div>
-        </div>
-        <div class="pemeran-card">
-          <div class="pemeran-photo"></div>
-          <div class="pemeran-name">nayla purama</div>
-        </div>
-        <div class="pemeran-card">
-          <div class="pemeran-photo"></div>
-          <div class="pemeran-name">rizky fachrel</div>
-        </div>
-        <div class="pemeran-card">
-          <div class="pemeran-photo"></div>
-          <div class="pemeran-name">astri nurdin</div>
-        </div>
+        <?php } ?>
       </div>
     </div>
 
@@ -200,7 +196,7 @@
     <div class="description-section">
       <h4>Description :</h4>
       <div class="description-box">
-        Siksa Neraka menceritakan kisah orang-orang yang mendapatkan balasan penyiksaan di akhirat karena telah berperilaku buruk selama dirinya hidup di dunia. Pada akhirnya, dosa-dosa yang mereka tumpuk dan abaikan akan menjadi bumerang bagi mereka di neraka. Dalam neraka yang panas, berbagai jenis penyiksaan akan diterapkan pada orang-orang yang memiliki berbagai sifat dan keburukan. Sesuai dengan dosa mereka, mereka akan menerima tingkat penyiksaan yang berbeda.
+        <?= $movies['description'] ?>
       </div>
     </div>
 

@@ -149,7 +149,7 @@
       <!-- FORM KIRI -->
       <div class="register-form">
         <h3>create account</h3>
-        <form action="register.php" method="POST">
+        <form action="proses_register.php" method="POST">
           <input type="text" name="username" placeholder="username" required>
           <input type="password" name="password" placeholder="password" required>
           <button type="submit">create</button>
