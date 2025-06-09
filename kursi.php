@@ -119,31 +119,33 @@ $query2 = mysqli_query($koneksi,$sql2);
       background-repeat: no-repeat;
       background-size: cover;
       color: white;
+      margin-top: 30px
     }
 
     .background {
-            margin-left: 215px;
-            background: linear-gradient(#17037d,#54488f,#999999) no-repeat; 
-            width: 1100px;
-            height: 320px;
+            margin-left: 220px;
+            background-color: #f19c9c ; 
+            width: 1125px;
+            height: 350px;
             border-radius: 15px;
             padding: 20px;
         }
-        .background h4{
-            color: white;
-            font-size: 15px;
-            background:rgba(153, 153, 153, 0);
-            border: solid 2px white;
-            border-radius: 5px;
-            width: 13px;
-            height: 20px;
-            padding: 7px 12px;
+        .posisi2{
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+            margin-top: 30px;
             
         }
-
+        .posisi2 label{
+            cursor: default;  
+            padding: 7px 12px;
+            width: 35px;
+            
+        }
         
          input[type="checkbox"]:checked + label {
-            background-color:rgb(92, 60, 248);
+            background-color: red;
             color: white;
             border: 2px solid rgb(255, 255, 255);
         }
@@ -152,6 +154,7 @@ $query2 = mysqli_query($koneksi,$sql2);
             border: 2px solid rgb(255, 255, 255);
             border-radius: 5px;
             cursor: pointer;
+            background-color:rgba(255, 255, 255, 0);
             color:rgb(252, 252, 252);
             transition: all 0.2s ease-in-out;
             font-weight: bold;
@@ -164,147 +167,143 @@ $query2 = mysqli_query($koneksi,$sql2);
 
         .A1 {
             position: absolute;
-            left: 400px;
-            top: 409px;
+            left: 440px;
+            top: 310px;
         }
 
         .A2 {
             position: absolute;
-            left: 800px;
-            top: 409px;
+            left: 773px;
+            top: 310px;
         }
 
         .B1 {
             position: absolute;
-            left: 350px;
-            top: 468px;
+            left: 391px;
+            top: 362px;
         }
 
         .B2 {
             position: absolute;
-            left: 800px;
-            top: 468px;
+            left: 773px;
+            top: 362px;
         }
 
         .C1 {
             position: absolute;
-            left: 350px;
-            top: 526px;
+            left: 391px;
+            top: 414px;
         }
 
         .C2 {
             position: absolute;
-            left: 800px;
-            top: 526px;
+            left: 773px;
+            top: 414px;
         }
 
         .D1 {
             position: absolute;
-            left: 400px;
-            top: 583px;
+            left: 440px;
+            top: 466px;
         }
 
         .D2 {
             position: absolute;
-            left: 800px;
-            top: 583px;
+            left: 773px;
+            top: 466px;
         }
 
         .E1 {
             position: absolute;
-            left: 350px;
-            top: 641px;
+            left: 391px;
+            top: 518px;
         }
 
         .E2 {
             position: absolute;
-            left: 800px;
-            top: 641px;
+            left: 773px;
+            top: 518px;
         }
         
         input[type="checkbox"]:disabled + label {
-            background-color:rgb(201, 199, 199);
+            background-color:rgb(245, 130, 130);
         }
-
-        input[type="submit"] {
-            width: 300px;
-            height: 60px;
-            margin-left: 750px;
-            border-radius: 10px;
-            border: none;
-            background:rgba(74, 9, 144, 0.23);
-            color: white;
-            font-size: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            left: 200px;
-            top: 730px;
-        }
-
 
         .kosong {
             padding: 7px 12px;
             border: 2px solid rgb(255, 255, 255);
             border-radius: 5px;
-            width: 10px;
-            height: 18px;
+            width: 30px;
+            height: 30px;
             position: absolute;
             left: 1200px;
-            top: 500px;
+            top: 355px;
             
         }
         .tempat1 {
             color: white;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px;
             position: absolute;
             left: 1250px;
-            top: 480px;
+            top: 360px;
         }
 
         .memilih {
             padding: 7px 12px;
-            background-color:rgb(92, 60, 248);
+            background-color: red;
             border: 2px solid rgb(255, 255, 255);
             border-radius: 5px;
-            width: 10px;
-            height: 18px;
+            width: 30px;
+            height: 30px;
             position: absolute;
             left: 1200px;
-            top: 550px;
+            top: 420px;
             
         }
         .tempat2 {
             color: white;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px;
             position: absolute;
             left: 1250px;
-            top: 530px;
+            top: 425px;
         }
 
         .terbooking {
             padding: 7px 12px;
-            background-color:rgb(201, 199, 199);
+            background-color:rgb(245, 130, 130);
             border: 2px solid rgb(255, 255, 255);
             border-radius: 5px;
-            width: 10px;
-            height: 18px;
+            width: 30px;
+            height: 30px;
             position: absolute;
             left: 1200px;
-            top: 600px;
+            top: 490px;
             
         }
         .tempat3 {
             color: white;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px;
             position: absolute;
             left: 1250px;
-            top: 580px;
+            top: 495px;
         }
 
+        input[type="submit"] {
+            width: 300px;
+            height: 60px;
+            margin-left: 370px;
+            border-radius: 20px;
+            border: none;
+            background: #DD4444;
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 90px;
+        }
     </style>
 </head>
 <body>
@@ -334,11 +333,14 @@ $query2 = mysqli_query($koneksi,$sql2);
 
   <div class="box">
     <div class="background">
-        <h4>A</h4>
-        <h4>B</h4>
-        <h4>C</h4>
-        <h4>D</h4>
-        <h4>E</h4>
+        <div class="posisi2">
+            <label for="">A</label>
+            <label for="">B</label>
+            <label for="">C</label>
+            <label for="">D</label>
+            <label for="">E</label>
+        </div>
+        
         <form action="transaksi.php" method="post">
             <input type="hidden" name="id_movies" value="<?= $id_movies ?>">
             <input type="hidden" name="tanggal" value="<?= $tanggal ?>">
@@ -501,7 +503,7 @@ $query2 = mysqli_query($koneksi,$sql2);
             <?php } ?>
             </div>
 
-            <input type="submit" value="BELI TIKET">
+            <input type="submit" value="BUY NOW ">
         </form>
         <script>
                 <?php while($css = mysqli_fetch_assoc($query2)){ ?>

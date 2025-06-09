@@ -12,7 +12,7 @@ $movies = mysqli_fetch_assoc($query);
 $sql2 = "SELECT * FROM jadwal_waktu WHERE id_movies = '$id_movies'";
 $query2 = mysqli_query($koneksi,$sql2);
 
-$sql3 = "SELECT * FROM jadwal_waktu WHERE id_movies = '$id_movies'";
+$sql3 = "SELECT DATE_FORMAT(waktu, '%H:%i') AS waktu, id_jadwal_waktu FROM jadwal_waktu WHERE id_movies = '$id_movies'";
 $query3 = mysqli_query($koneksi,$sql3);
 
 $id = 1;
