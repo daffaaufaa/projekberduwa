@@ -1,6 +1,13 @@
 <?php
 include "koneksi.php";
-$sql = "SELECT * FROM movies ORDER BY id_movie DESC";
+$sql9 = "SELECT * FROM movies";
+$query = mysqli_query($koneksi, $sql9);
+
+$query = "SELECT id_iklan, judul_iklan, gambar FROM iklan"; // ✅
+
+
+
+$sql = "SELECT * FROM movies ORDER BY id_movies DESC";
 $query = mysqli_query($koneksi,$sql);
 while($movies= mysqli_fetch_assoc($query)){ 
     $id_movies = $movies['id_movies'];
@@ -22,8 +29,8 @@ if(isset($_POST['jumlah'])){
     $jumlah = 1;
     
 }
-$sql = "SELECT gambar FROM iklan ORDER BY id_iklan DESC";
-$query = mysqli_query($koneksi,$sql);
+$sql6 = "SELECT gambar FROM iklan ORDER BY id_iklan DESC";
+$query = mysqli_query($koneksi,$sql6);
 ?>
 
 <!DOCTYPE html>
@@ -158,6 +165,136 @@ $query = mysqli_query($koneksi,$sql);
       border-radius: 8px;
       cursor: pointer;
     }
+    #dashboard.movie,
+  #dashboard\ movie {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+
+  /* Judul section */
+  #dashboard.movie h1,
+  #dashboard\ movie h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #b30000;
+    border-bottom: 2px solid #b30000;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  /* Tabel */
+  #dashboard.movie table,
+  #dashboard\ movie table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+  }
+
+  /* Header tabel */
+  #dashboard.movie th,
+  #dashboard\ movie th {
+    background-color: #b30000;
+    color: white;
+    padding: 12px;
+    text-align: left;
+  }
+
+  /* Isi tabel */
+  #dashboard.movie td,
+  #dashboard\ movie td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+  }
+
+  /* Gambar */
+  .iklan img {
+    width: 80px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  /* Aksi link */
+  #dashboard.movie a,
+  #dashboard\ movie a {
+    display: inline-block;
+    margin: 4px 6px;
+    padding: 6px 12px;
+    color: white;
+    background-color: #e60000;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s;
+  }
+
+  #dashboard.movie a:hover,
+  #dashboard\ movie a:hover {
+    background-color: #990000;
+  }
+  <style>
+  /* Container styling */
+  .content {
+    padding: 40px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+  }
+
+  .section {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  th {
+    background-color: #f44336;
+    color: white;
+    padding: 15px 10px;
+    font-size: 16px;
+  }
+
+  td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #333;
+  }
+
+  tr:hover {
+    background-color: #fff0f0;
+  }
+
+  .iklan img {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+  }
+
+  .iklan img:hover {
+    transform: scale(1.05);
+  }
+
+  a {
+    background-color: #e53935;
+    color: white;
+    padding: 8p
+  }
   </style>
 </head>
 <body>
@@ -171,6 +308,8 @@ $query = mysqli_query($koneksi,$sql);
     <!-- Sidebar -->
     <div class="sidebar">
       <h3>Manajemen</h3>
+      <button onclick="showSection('dashboard movie')">Dashboard Movie</button>
+      <button onclick="showSection('dashboard iklan')">Dashboard Iklan</button>
       <button onclick="showSection('movie')">Management Movie</button>
       <button onclick="showSection('jadwal')">Management Jadwal</button>
       <button onclick="showSection('iklan')">Management Iklan</button>
@@ -179,6 +318,62 @@ $query = mysqli_query($koneksi,$sql);
 
     <!-- Content Area -->
     <div class="content">
+      <div id="dashboard movie" class="section">
+        <h1>DASHBOARD MOVIE</h1>
+    <table border="1">
+        <tr>
+            <th>Id Movies</th>
+            <th>Judul</th>
+            <th>Genre</th>
+            <th>Description</th>
+            <th>Tanggal Release</th>
+            <th>Durasi</th>
+            <th>Gambar</th>
+            <th>Max Tayang</th>
+            <th>Aksi</th>
+        </tr>
+        <?php while($movies = mysqli_fetch_assoc($query2)){?>
+        <tr>
+            <td><?= $movies['id_movies']; ?></td>
+            <td><?= $movies['title']; ?></td>
+            <td><?= $movies['genre']; ?></td>
+            <td><?= $movies['description']; ?></td>
+            <td><?= $movies['release_date']; ?></td>
+            <td><?= $movies['duration']; ?></td>
+            <td><div class="iklan"><img src="movie/<?= $movies['poster_image'] ?>" ></div></td>
+            <td><?= $movies['max_tayang']; ?></td>
+            <td>
+              <a href="edit_movies.php?id=<?= $movies['id_movies']; ?>">Edit</a>
+            <a href="hapus_movies.php?id=<?= $movies['id_movies']; ?>">hapus</a>
+            </td>
+        </tr>
+        <?php }?>
+    </table>
+      </div>
+      <div class="content">
+      <div id="dashboard iklan" class="section">
+        <table border="1">
+        <tr>
+            <th>id iklan</th>
+            <th>nama gambar</th>
+            <th>gambar</th>
+            <th>aksi</th>
+        </tr>
+        <?php while($iklan = mysqli_fetch_assoc($query)){?>
+        <tr>
+            
+            <td><?= $iklan['id_iklan'] ?? ''; ?></td>
+
+            <td><?= $iklan['gambar']; ?></td>
+            <td><div class="iklan"><img src="iklan/<?= $iklan['gambar'] ?>" ></div></td>
+            <td>
+                <a href="hapus_gambar.php?id=<?= $movies['id_iklan']; ?>">hapus</a>
+            </td>
+        </tr>
+        <?php }?>
+
+    </table>
+        </div>
       <div id="movie" class="section active">
         <form action="prs_tambah_movies.php" method="post" enctype="multipart/form-data">
         <label for="">Judul :</label><br>
@@ -234,7 +429,7 @@ $query = mysqli_query($koneksi,$sql);
     </form>
       </div>
       <div id="iklan" class="section">
-       h3>Tambah Gambar</h3><br>
+       <h3>IKLAN</h3><br>
        <form action="prs_tambah_gambar.php" method="post" enctype="multipart/form-data">
         <input type="file" name="gambar" id="" ><br><br>
         <input type="submit" value="Tambah gambar" name="submit">

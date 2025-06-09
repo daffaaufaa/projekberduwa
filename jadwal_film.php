@@ -77,7 +77,14 @@ $id = 1;
       background-size: contain;
       border-radius: 50%;
     }
-
+.screen {
+  background-color: #f9a9a9;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 .movie-container {
   text-align: center;
   margin-top: 30px;
@@ -183,7 +190,7 @@ $id = 1;
 }
 
 
-.pick-button {
+input[type="submit"] {
   display: inline-block;
   margin-top: 15px;
   background-color: red;
@@ -192,6 +199,8 @@ $id = 1;
   padding: 10px 25px;
   font-weight: bold;
   border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
 
 
@@ -261,6 +270,7 @@ $id = 1;
       
       <div id="isi_jadwal">
         <form action="kursi.php" method="post">
+          <input type="hidden" name="id_movies" value="<?= $id_movies ?>">
         <div class="jarak">
         <div class="schedules">
           <strong>SCHEDULES</strong>
@@ -270,7 +280,7 @@ $id = 1;
 
 
                     $tanggal_hari = $date->format('d'); // hari 2 angka, pake nol
-                    $nama_hari = $date->format('D'); 
+                    $nama_hari = $date->format('l'); 
                     
                     $id += 1;
                 ?>
@@ -290,7 +300,7 @@ $id = 1;
           </div>
         </div>
         <hr>
-        <a href="#" class="pick-button">PICK YOUR SEAT</a>
+        <input type="submit" value="PICK YOUR SEAT">
       </div>
       </form>
       </div>
