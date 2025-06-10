@@ -1,8 +1,8 @@
 <?php
 include "koneksi.php";
-if(!isset($_GET['id_movies'])){
-  header("location:home.php");
-}
+// if(!isset($_GET['id_movies'])){
+//   header("location:home.php");
+// }
 $id_movies = $_GET['id_movies'];
 $sql = "SELECT * FROM movies WHERE id_movies='$id_movies'";
 $query = mysqli_query($koneksi, $sql);

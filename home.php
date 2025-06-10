@@ -2,20 +2,18 @@
 include "koneksi.php";
 session_start();
 
-if(isset($_SESSION['username'])){
-  $username = $_SESSION['username']."!";
-  
-}else{
+if (isset($_SESSION['username'])) {
+  $username = $_SESSION['username'] . "!";
+} else {
   $username = "to AZFATICKET.XXI!";
-  
 }
+
 $sql = "SELECT * FROM iklan";
 $query = mysqli_query($koneksi, $sql);
 
 $sekarang = date("Y-m-d");
 $sql2 = "SELECT * FROM movies WHERE max_tayang >= '$sekarang'";
-$query2 =  mysqli_query($koneksi,$sql2);
-
+$query2 = mysqli_query($koneksi, $sql2);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -24,29 +22,45 @@ $query2 =  mysqli_query($koneksi,$sql2);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AZFATICKET.XXI</title>
   <style>
-    /* daftar font */
     @font-face {
-            src: url('font/KeaniaOne.ttf') format('truetype');
-            font-family: 'KeaniaOne';
-            font-weight: normal;
-            font-style: normal;
-        }
-    /* Reset dasar */
-       body {
-      margin: 0;
-      background-color: #ffffff;
+      src: url('font/KeaniaOne.ttf') format('truetype');
+      font-family: 'KeaniaOne';
     }
-        * {
+
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-        header {
-      background-color: #f19c9c;
+
+    body {
+      background-color: #fff;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      animation: fadeInBody 1s ease-in;
+    }
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      background-color: #c62828;
+      color: white;
       padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideDown 0.7s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
 
     .logo {
@@ -55,115 +69,129 @@ $query2 =  mysqli_query($koneksi,$sql2);
       font-weight: bold;
       font-size: 24px;
     }
+
     .logo img {
       margin-right: 10px;
-      height: 9%;
-      width: 9%;
+      height: 40px;
+      width: auto;
     }
 
     nav a {
       margin: 0 15px;
       text-decoration: none;
-      color: #000;
+      color: white;
       font-weight: bold;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffebee;
+      transform: scale(1.1);
     }
 
     .profile-icon {
       width: 40px;
       height: 40px;
       background-image: url('userputih.jpg');
-      background-size: contain;
+      background-size: cover;
       border-radius: 50%;
     }
 
-    /* Welcome section */
     .welcome {
       font-family: "KeaniaOne";
       text-align: center;
       font-size: 34px;
       margin: 30px 0;
+      color: #c62828;
+      animation: fadeInText 1.5s ease-in-out;
     }
 
-    .voucher-container {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 40px;
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    .voucher-container img {
-      width: 200px;
-      height: 120px;
-      border-radius: 10px;
-    }
-
-    /* Movie selection */
-    .movie-section {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .movie-section h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .movie-list {
+    .voucher-container, .movie-list {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 15px;
+      margin-bottom: 40px;
+      animation: fadeInCards 1.2s ease-in-out;
+    }
+
+    .voucher-container img, .movie-list img {
+      width: 200px;
+      height: 120px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
     }
 
     .movie-list img {
-      width: 170px;
       height: 210px;
-      border-radius: 8px;
     }
 
-    /* Update section */
-    .update-section {
+    .voucher-container img:hover, .movie-list img:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeInCards {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .movie-section, .update-section {
       text-align: center;
       margin-bottom: 40px;
     }
 
-    .update-section h2 {
-      font-size: 22px;
+    .movie-section h2, .update-section h2 {
+      font-size: 28px;
       font-weight: bold;
+      color: #b71c1c;
+      margin-bottom: 20px;
+    }
+
+    .update-section h3 {
+      font-size: 20px;
       margin-bottom: 10px;
+      color: #c62828;
     }
 
     .about-us {
       width: 60%;
       margin: 0 auto;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.6;
+      color: #333;
     }
 
-    /* Footer */
     footer {
-      background-color: #d41d1d;
+      background-color: #c62828;
       color: white;
       padding: 30px;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+      animation: fadeInFooter 1.2s ease-in;
+    }
+
+    @keyframes fadeInFooter {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .social-media, .download, .contact {
       width: 30%;
     }
 
-    .social-media h4,
-    .download h4,
-    .contact h4 {
+    .social-media h4, .download h4, .contact h4 {
       font-size: 16px;
       margin-bottom: 10px;
     }
 
-    .social-media p,
-    .contact p {
+    .social-media p, .contact p {
       margin-bottom: 5px;
       font-size: 14px;
     }
@@ -182,42 +210,38 @@ $query2 =  mysqli_query($koneksi,$sql2);
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
     <div class="logo">
-      <img src="logo_web.png" alt="" />
-      AZFATICKET.XXI</div>
+      <img src="logo_web.png" alt="Logo" />
+      AZFATICKET.XXI
+    </div>
     <nav>
       <a href="#">MOVIE</a>
-      <a href="#">CINEMA</a>  
+      <a href="#">CINEMA</a>
       <a href="#">CONTACT</a>
     </nav>
     <div class="profile-icon"></div>
   </header>
 
-  <!-- Welcome -->
-  <div class="welcome">welcome <?= $username; ?> </div>
+  <div class="welcome">Welcome <?= $username; ?></div>
 
-  <!-- Voucher Section -->
   <div class="voucher-container">
     <?php while($gambar= mysqli_fetch_assoc($query)){ ?>
         <img src="iklan/<?= $gambar['gambar']?>" alt="">
     <?php } ?>
   </div>
 
-  <!-- Movie Section -->
   <div class="movie-section">
     <h2>MOVIE SELECTION</h2>
     <div class="movie-list">
       <?php while($gambar2=mysqli_fetch_assoc($query2)){ ?>
-            <a href="jadwal_film.php?id_movies=<?= $gambar2['id_movies'] ?>"><img src="movie\<?= $gambar2['poster_image']?>" alt=""></a>
+        <a href="jadwal_film.php?id_movies=<?= $gambar2['id_movies'] ?>">
+          <img src="movie/<?= $gambar2['poster_image']?>" alt="">
+        </a>
       <?php } ?>
-      <div class="movie"></div>
     </div>
   </div>
 
-  <!-- Update Section -->
   <div class="update-section">
     <h2>AZFA UPDATE</h2>
     <h3>About Us</h3>
@@ -228,20 +252,19 @@ $query2 =  mysqli_query($koneksi,$sql2);
     </p>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="social-media">
-      <h4>social media</h4>
+      <h4>Social Media</h4>
       <p>@azfabioskop_1indonesia</p>
       <p>@azfabioskopindonesia</p>
     </div>
     <div class="download">
       <h4>Download by</h4>
-      <img src="#" alt="Google Play (placeholder)">
-      <img src="#" alt="App Store (placeholder)">
+      <img src="#" alt="Google Play">
+      <img src="#" alt="App Store">
     </div>
     <div class="contact">
-      <h4>contact me</h4>
+      <h4>Contact Me</h4>
       <p>Jl. Kenyamanan Blok A no. 4 Jakarta pusat</p>
       <p>+62 857 8663 7284</p>
       <p>azfaticket@gmail.com</p>
@@ -250,6 +273,5 @@ $query2 =  mysqli_query($koneksi,$sql2);
       COPYRIGHT 2025. AZFA XXI ALL RIGHTS RESERVED.
     </div>
   </footer>
-
 </body>
 </html>
