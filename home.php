@@ -1,14 +1,5 @@
 <?php
 include "koneksi.php";
-
-
-
-$sql = "SELECT * FROM iklan";
-$query = mysqli_query($koneksi, $sql);
-
-$sekarang = date("Y-m-d");
-$sql2 = "SELECT * FROM movies WHERE max_tayang >= '$sekarang'";
-$query2 = mysqli_query($koneksi, $sql2);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -43,59 +34,85 @@ $query2 = mysqli_query($koneksi, $sql2);
     header {
       background-color: #c62828;
       color: white;
-      padding: 15px 30px;
+      padding: 25px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 1000;
-      animation: slideDown 0.7s ease-out;
+      border-radius: 0 0 50px 50px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      animation: navFadeIn 1s ease-in-out;
     }
 
-    @keyframes slideDown {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(0); }
+    @keyframes navFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .logo {
       display: flex;
       align-items: center;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 28px;
     }
 
     .logo img {
       margin-right: 10px;
-      height: 40px;
+      height: 50px;
       width: auto;
     }
 
     nav a {
-      margin: 0 15px;
+      margin: 0 18px;
       text-decoration: none;
       color: white;
       font-weight: bold;
-      transition: transform 0.3s, color 0.3s;
+      font-size: 18px;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     nav a:hover {
-      color: #ffebee;
       transform: scale(1.1);
     }
 
     .profile-icon {
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       background-image: url('userputih.jpg');
       background-size: cover;
       border-radius: 50%;
+      border: 2px solid white;
     }
 
     .welcome {
       font-family: "KeaniaOne";
       text-align: center;
-      font-size: 34px;
+      font-size: 36px;
       margin: 30px 0;
       color: #c62828;
       animation: fadeInText 1.5s ease-in-out;
