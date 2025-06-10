@@ -1,18 +1,11 @@
-<?php
-include "koneksi.php";
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AZFATICKET.XXI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    @font-face {
-      src: url('font/KeaniaOne.ttf') format('truetype');
-      font-family: 'KeaniaOne';
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -21,7 +14,7 @@ include "koneksi.php";
 
     body {
       background-color: #fff;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
       animation: fadeInBody 1s ease-in;
     }
@@ -47,14 +40,8 @@ include "koneksi.php";
     }
 
     @keyframes navFadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(-50px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .logo {
@@ -74,7 +61,7 @@ include "koneksi.php";
       margin: 0 18px;
       text-decoration: none;
       color: white;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 18px;
       position: relative;
       transition: all 0.4s ease;
@@ -110,73 +97,78 @@ include "koneksi.php";
     }
 
     .welcome {
-      font-family: "KeaniaOne";
+      font-family: 'Lora', serif;
       text-align: center;
-      font-size: 36px;
+      font-size: 40px;
       margin: 30px 0;
       color: #c62828;
       animation: fadeInText 1.5s ease-in-out;
     }
 
     @keyframes fadeInText {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .voucher-container, .movie-list {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 25px;
       margin-bottom: 40px;
-      animation: fadeInCards 1.2s ease-in-out;
+      animation: zoomIn 1s ease-in-out;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .voucher-container img, .movie-list img {
-      width: 200px;
-      height: 120px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 280px;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s;
     }
 
     .movie-list img {
-      height: 210px;
+      height: 360px;
     }
 
     .voucher-container img:hover, .movie-list img:hover {
-      transform: scale(1.05);
-    }
-
-    @keyframes fadeInCards {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      transform: scale(1.07);
     }
 
     .movie-section, .update-section {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
     }
 
     .movie-section h2, .update-section h2 {
-      font-size: 28px;
-      font-weight: bold;
+      font-size: 32px;
+      font-weight: 600;
       color: #b71c1c;
       margin-bottom: 20px;
     }
 
     .update-section h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
+      font-size: 24px;
+      margin-bottom: 15px;
       color: #c62828;
     }
 
     .about-us {
-      width: 60%;
+      width: 70%;
       margin: 0 auto;
-      font-size: 15px;
-      line-height: 1.6;
+      font-size: 17px;
+      line-height: 1.8;
       color: #333;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.08);
+      font-family: 'Lora', serif;
     }
 
     footer {
@@ -221,69 +213,3 @@ include "koneksi.php";
     }
   </style>
 </head>
-<body>
-  <header>
-    <div class="logo">
-      <img src="logo_web.png" alt="Logo" />
-      AZFATICKET.XXI
-    </div>
-    <nav>
-      <a href="#">MOVIE</a>
-      <a href="#">CINEMA</a>
-      <a href="#">CONTACT</a>
-    </nav>
-    <div class="profile-icon"></div>
-  </header>
-
-  <div class="welcome">Welcome <?= $username; ?></div>
-
-  <div class="voucher-container">
-    <?php while($gambar= mysqli_fetch_assoc($query)){ ?>
-        <img src="iklan/<?= $gambar['gambar']?>" alt="">
-    <?php } ?>
-  </div>
-
-  <div class="movie-section">
-    <h2>MOVIE SELECTION</h2>
-    <div class="movie-list">
-      <?php while($gambar2=mysqli_fetch_assoc($query2)){ ?>
-        <a href="jadwal_film.php?id_movies=<?= $gambar2['id_movies'] ?>">
-          <img src="movie/<?= $gambar2['poster_image']?>" alt="">
-        </a>
-      <?php } ?>
-    </div>
-  </div>
-
-  <div class="update-section">
-    <h2>AZFA UPDATE</h2>
-    <h3>About Us</h3>
-    <p class="about-us">
-      Azfa Bioskop adalah tempat terbaik untuk menikmati film dengan pengalaman menonton yang nyaman, modern, dan seru. Kami menyajikan berbagai film pilihan dari dalam dan luar negeri, lengkap dengan teknologi layar dan suara terkini. <br><br>
-      Bukan sekadar bioskop, Azfa adalah ruang berkumpul untuk keluarga, sahabat, dan komunitas pecinta film. Kami hadir untuk menghadirkan hiburan berkualitas dan momen tak terlupakan di setiap tayangan. <br><br>
-      AZFATICKET.XXI – Tempat cerita dimulai!
-    </p>
-  </div>
-
-  <footer>
-    <div class="social-media">
-      <h4>Social Media</h4>
-      <p>@azfabioskop_1indonesia</p>
-      <p>@azfabioskopindonesia</p>
-    </div>
-    <div class="download">
-      <h4>Download by</h4>
-      <img src="#" alt="Google Play">
-      <img src="#" alt="App Store">
-    </div>
-    <div class="contact">
-      <h4>Contact Me</h4>
-      <p>Jl. Kenyamanan Blok A no. 4 Jakarta pusat</p>
-      <p>+62 857 8663 7284</p>
-      <p>azfaticket@gmail.com</p>
-    </div>
-    <div class="copyright">
-      COPYRIGHT 2025. AZFA XXI ALL RIGHTS RESERVED.
-    </div>
-  </footer>
-</body>
-</html>
