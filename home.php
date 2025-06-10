@@ -1,12 +1,7 @@
 <?php
 include "koneksi.php";
-session_start();
 
-if (isset($_SESSION['username'])) {
-  $username = $_SESSION['username'] . "!";
-} else {
-  $username = "to AZFATICKET.XXI!";
-}
+
 
 $sql = "SELECT * FROM iklan";
 $query = mysqli_query($koneksi, $sql);
